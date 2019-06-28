@@ -16,6 +16,7 @@ namespace Turtle_Graphics
             int[,] floor = new int[20, 20];
             int[,] program = new int[2, 1];
             int userNumber;
+            int realNumber;
             Console.WriteLine("Welcome to the Turtle Graphics Program");
             Console.WriteLine("Keep in mind your commands.  If you forget, type 'commands' to see them again.");
 
@@ -60,6 +61,7 @@ namespace Turtle_Graphics
                         }
                         else
                         {
+                            realNumber = userNumber;
                             BeginDrawing();
                         }
                     }
@@ -73,43 +75,75 @@ namespace Turtle_Graphics
 
             void BeginDrawing()
             {
-                if (userNumber == 1)
+                switch (realNumber)
                 {
-                    Console.WriteLine("Command 1 has been entered.");
+                    case 1:
+                        Console.WriteLine("Command 1 has been entered.");
+                        PenUp();
+                        break;
+                    case 2:
+                        Console.WriteLine("Command 2 has been entered.");
+                        PenDown();
+                        break;
+                    case 3:
+                        Console.WriteLine("Command 3 has been entered.");
+                        TurnRight();
+                        break;
+                    case 4:
+                        Console.WriteLine("Command 4 has been entered.");
+                        TurnLeft();
+                        break;
+                    case 5:
+                        Console.WriteLine("Command 5 has been entered.");
+                        MoveForward();
+                        break;
+                    case 6:
+                        Console.WriteLine("Command 6 has been entered.");
+                        PrintData();
+                        break;
+                    case 9:
+                        Console.WriteLine("Command 9 has been entered.");
+                        ExitApp();
+                        break;
+                    default:
+                        Console.WriteLine("");
+                        break;
                 }
+            }
 
-                if (userNumber == 2)
-                {
-                    Console.WriteLine("Command 2 has been entered.");
-                }
+            void PenUp()
+            {
+                TakeInput();
+            }
 
-                if (userNumber == 3)
-                {
-                    Console.WriteLine("Command 3 has been entered.");
-                }
+            void PenDown()
+            {
+                TakeInput();
+            }
 
-                if (userNumber == 4)
-                {
-                    Console.WriteLine("Command 4 has been entered.");
-                }
+            void TurnRight()
+            {
+                TakeInput();
+            }
 
-                if (userNumber == 5)
-                {
-                    Console.WriteLine("Command 5 has been entered.");
-                }
+            void TurnLeft()
+            {
+                TakeInput();
+            }
 
-                if (userNumber == 6)
-                {
-                    Console.WriteLine("Command 6 has been entered.");
-                }
+            void MoveForward()
+            {
+                Console.WriteLine("Please enter the distance to travel.");
+                TakeInput();
+            }
 
-                if (userNumber == 9)
-                {
-                    Console.WriteLine("Command 9 has been entered.");
-                }
+            void PrintData()
+            {
+                TakeInput();
+            }
 
-                Console.WriteLine("The user is now drawing.");
-                Console.WriteLine("");
+            void ExitApp()
+            {
                 TakeInput();
             }
         }
