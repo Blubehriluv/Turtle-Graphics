@@ -139,6 +139,17 @@ namespace Turtle_Graphics
 
             void PrintData()
             {
+                for (int row = 0; row < floor.GetLength(0); row++)
+                {
+                    if (row % 10 == 0)
+                    {
+                        for (int column = 0; column < floor.GetLength(1); column++)
+                        {
+                            Console.WriteLine(floor[row, column]);
+                        }
+                    }
+                   Console.WriteLine();
+                }
                 TakeInput();
             }
 
