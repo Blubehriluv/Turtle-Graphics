@@ -119,6 +119,7 @@ namespace Turtle_Graphics
                         break;
                     case 5:
                         Console.WriteLine("Command 5 has been entered.");
+                        Console.WriteLine("Please enter the distance to travel.");
                         MoveForward();
                         break;
                     case 6:
@@ -157,7 +158,28 @@ namespace Turtle_Graphics
 
             void MoveForward()
             {
-                Console.WriteLine("Please enter the distance to travel.");
+                string userInput = Console.ReadLine();
+
+                try
+                {
+                    int userDistance = Convert.ToInt32(userInput);
+
+                    if (userDistance >= 0 && userDistance <= 20)
+                    {
+                        Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a number 0 - 20.");
+                        MoveForward();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Invalid input.\nReturning to commands.");
+                    ViewCommands();
+                }
+
                 TakeInput();
             }
 
