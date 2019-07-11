@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,9 @@ namespace Turtle_Graphics
 
         static void Main(string[] args)
         {
-            //int[,] floor = new int[20, 20];
+            int rowNum = 0;
+            int colNum = 0;
+            bool isDrawing = false;
             int[,] floor = new int[20, 20]
             {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -138,11 +141,16 @@ namespace Turtle_Graphics
 
             void PenUp()
             {
+                isDrawing = false;
+                //floor.SetValue(1, rowNum, colNum);
+                Console.WriteLine("The turtle is NOT drawing.");
                 TakeInput();
             }
 
             void PenDown()
             {
+                isDrawing = true;
+                Console.WriteLine("The turtle is now drawing.");
                 TakeInput();
             }
 
@@ -166,7 +174,17 @@ namespace Turtle_Graphics
 
                     if (userDistance >= 0 && userDistance <= 20)
                     {
-                        Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
+                        if (isDrawing == true)
+                        {
+
+                            Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
+                        }
+
+                        if (isDrawing != false)
+                        {
+
+                            Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
+                        }
                     }
                     else
                     {
