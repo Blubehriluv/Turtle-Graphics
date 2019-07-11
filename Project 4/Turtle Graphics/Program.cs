@@ -17,6 +17,11 @@ namespace Turtle_Graphics
             int rowNum = 0;
             int colNum = 0;
             bool isDrawing = false;
+            bool goUp = false;
+            bool goDown = false;
+            bool goLeft = false;
+            bool goRight = true;
+
             int[,] floor = new int[20, 20]
             {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -44,6 +49,8 @@ namespace Turtle_Graphics
             int[,] program = new int[2, 1];
             int userNumber;
             int realNumber;
+            int userDistance;
+
             Console.WriteLine("Welcome to the Turtle Graphics Program");
             Console.WriteLine("Keep in mind your commands.  If you forget, type 'commands' to see them again.");
 
@@ -133,9 +140,6 @@ namespace Turtle_Graphics
                         Console.WriteLine("Command 9 has been entered.");
                         ExitApp();
                         break;
-                    default:
-                        Console.WriteLine("");
-                        break;
                 }
             }
 
@@ -143,14 +147,14 @@ namespace Turtle_Graphics
             {
                 isDrawing = false;
                 //floor.SetValue(1, rowNum, colNum);
-                Console.WriteLine("The turtle is NOT drawing.");
+                Console.WriteLine("The turtle raises the pen...");
                 TakeInput();
             }
 
             void PenDown()
             {
                 isDrawing = true;
-                Console.WriteLine("The turtle is now drawing.");
+                Console.WriteLine("Ready to draw!");
                 TakeInput();
             }
 
@@ -170,21 +174,21 @@ namespace Turtle_Graphics
 
                 try
                 {
-                    int userDistance = Convert.ToInt32(userInput);
+                    userDistance = Convert.ToInt32(userInput);
 
                     if (userDistance >= 0 && userDistance <= 20)
                     {
                         if (isDrawing == true)
                         {
-
                             Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
+                            TurtleMoving();
                         }
 
-                        if (isDrawing != false)
+                        if (isDrawing == false)
                         {
-
                             Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
-                        }
+                            TurtleMoving();
+                            }
                     }
                     else
                     {
@@ -199,6 +203,49 @@ namespace Turtle_Graphics
                 }
 
                 TakeInput();
+            }
+
+            void TurtleMoving()
+            {
+                if (goDown == true)
+                {
+                    while (userDistance > 0)
+                    {
+                        floor.SetValue(1, rowNum, colNum);
+                        userDistance--;
+                        colNum++;
+                    }
+                }
+
+                if (goUp == true)
+                {
+                    while (userDistance > 0)
+                    {
+                        floor.SetValue(1, rowNum, colNum);
+                        userDistance--;
+                        colNum--;
+                    }
+                }
+
+                if (goLeft == true)
+                {
+                    while (userDistance > 0)
+                    {
+                        floor.SetValue(1, rowNum, colNum);
+                        userDistance--;
+                        rowNum--;
+                    }
+                }
+                
+                if (goRight == true)
+                {
+                    while(userDistance > 0)
+                    {
+                        floor.SetValue(1, rowNum, colNum);
+                        rowNum++;
+                        userDistance--;
+                    }
+                }
             }
 
             void PrintData()
