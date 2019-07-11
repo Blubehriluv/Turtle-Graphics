@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Turtle_Graphics
 {
     class Program
     {
-        enum CommandList {PenUp = 1, PenDown = 2, TurnRight = 3, TurnLeft = 4, MoveForward = 5, Print = 6, End = 9};
+        //enum CommandList {PenUp = 1, PenDown = 2, TurnRight = 3, TurnLeft = 4, MoveForward = 5, Print = 6, End = 9};
 
         static void Main(string[] args)
         {
             int rowNum = 0;
             int colNum = 0;
+            int realNumber;
+            int userDistance;
+            int penActive = 0;
             bool isDrawing = false;
             bool goUp = false;
             bool goDown = false;
@@ -47,9 +44,7 @@ namespace Turtle_Graphics
             };
             
             int[,] program = new int[2, 1];
-            int userNumber;
-            int realNumber;
-            int userDistance;
+            
 
             Console.WriteLine("Welcome to the Turtle Graphics Program");
             Console.WriteLine("Keep in mind your commands.  If you forget, type 'commands' to see them again.");
@@ -86,7 +81,7 @@ namespace Turtle_Graphics
                 {
                     try
                     {
-                        userNumber = Convert.ToInt32(userCommand);
+                        int userNumber = Convert.ToInt32(userCommand);
                         if (userNumber != 1 && userNumber != 2 && userNumber != 3 && userNumber != 4 &&
                             userNumber != 5 && userNumber != 6 && userNumber != 9)
                         {
@@ -146,7 +141,7 @@ namespace Turtle_Graphics
             void PenUp()
             {
                 isDrawing = false;
-                //floor.SetValue(1, rowNum, colNum);
+                penActive = 0;
                 Console.WriteLine("The turtle raises the pen...");
                 TakeInput();
             }
@@ -154,17 +149,64 @@ namespace Turtle_Graphics
             void PenDown()
             {
                 isDrawing = true;
+                penActive = 1;
                 Console.WriteLine("Ready to draw!");
                 TakeInput();
             }
 
             void TurnRight()
             {
+                if (goDown)
+                {
+                    goLeft = true;
+                    goDown = false;
+                }
+
+                if (goUp)
+                {
+                    goRight = true;
+                    goUp = false;
+                }
+
+                if (goLeft)
+                {
+                    goUp = true;
+                    goLeft = false;
+                }
+
+                if (goRight)
+                {
+                    goDown = true;
+                    goRight = false;
+                }
                 TakeInput();
             }
 
             void TurnLeft()
             {
+                if (goDown)
+                {
+                    goRight = true;
+                    goDown = false;
+                }
+
+                if (goUp)
+                {
+                    goLeft = true;
+                    goUp = false;
+                }
+
+                if (goLeft)
+                {
+                    goDown = true;
+                    goLeft = false;
+                }
+
+                if (goRight)
+                {
+                    goLeft = true;
+                    goRight = false;
+                }
                 TakeInput();
             }
 
@@ -178,7 +220,7 @@ namespace Turtle_Graphics
 
                     if (userDistance >= 0 && userDistance <= 20)
                     {
-                        if (isDrawing == true)
+                        if (isDrawing)
                         {
                             Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
                             TurtleMoving();
@@ -207,43 +249,43 @@ namespace Turtle_Graphics
 
             void TurtleMoving()
             {
-                if (goDown == true)
+                if (goDown)
                 {
                     while (userDistance > 0)
                     {
-                        floor.SetValue(1, rowNum, colNum);
+                        floor.SetValue(penActive, rowNum, colNum);
                         userDistance--;
                         colNum++;
                     }
                 }
 
-                if (goUp == true)
+                if (goUp)
                 {
                     while (userDistance > 0)
                     {
-                        floor.SetValue(1, rowNum, colNum);
+                        floor.SetValue(penActive, rowNum, colNum);
                         userDistance--;
                         colNum--;
                     }
                 }
 
-                if (goLeft == true)
+                if (goLeft)
                 {
                     while (userDistance > 0)
                     {
-                        floor.SetValue(1, rowNum, colNum);
+                        floor.SetValue(penActive, rowNum, colNum);
                         userDistance--;
                         rowNum--;
                     }
                 }
                 
-                if (goRight == true)
+                if (goRight)
                 {
                     while(userDistance > 0)
                     {
-                        floor.SetValue(1, rowNum, colNum);
-                        rowNum++;
+                        floor.SetValue(penActive, rowNum, colNum);
                         userDistance--;
+                        rowNum++;
                     }
                 }
             }
