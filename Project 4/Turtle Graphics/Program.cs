@@ -140,18 +140,36 @@ namespace Turtle_Graphics
 
             void PenUp()
             {
-                isDrawing = false;
-                penActive = 0;
-                Console.WriteLine("The turtle raises the pen...");
-                TakeInput();
+                if (isDrawing)
+                {
+                    isDrawing = false;
+                    penActive = 0;
+                    Console.WriteLine("Turtle break time...");
+                    TakeInput();
+                }
+                else
+                {
+                    Console.WriteLine("The pen is already up!");
+                    TakeInput();
+                }
+                
             }
 
             void PenDown()
             {
-                isDrawing = true;
-                penActive = 1;
-                Console.WriteLine("Ready to draw!");
-                TakeInput();
+                if (isDrawing == false)
+                {
+                    isDrawing = true;
+                    penActive = 1;
+                    Console.WriteLine("Ready to draw!");
+                    TakeInput();
+                }
+                else
+                {
+                    Console.WriteLine("You are already drawing!");
+                    TakeInput();
+                }
+                
             }
 
             void TurnRight()
@@ -230,7 +248,7 @@ namespace Turtle_Graphics
                         {
                             Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
                             TurtleMoving();
-                            }
+                        }
                     }
                     else
                     {
@@ -257,6 +275,7 @@ namespace Turtle_Graphics
                         userDistance--;
                         colNum++;
                     }
+                    TakeInput();
                 }
 
                 if (goUp)
@@ -267,6 +286,7 @@ namespace Turtle_Graphics
                         userDistance--;
                         colNum--;
                     }
+                    TakeInput();
                 }
 
                 if (goLeft)
@@ -277,6 +297,7 @@ namespace Turtle_Graphics
                         userDistance--;
                         rowNum--;
                     }
+                    TakeInput();
                 }
                 
                 if (goRight)
@@ -287,6 +308,7 @@ namespace Turtle_Graphics
                         userDistance--;
                         rowNum++;
                     }
+                    TakeInput();
                 }
             }
 
