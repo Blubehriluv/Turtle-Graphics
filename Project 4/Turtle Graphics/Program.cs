@@ -8,6 +8,7 @@ namespace Turtle_Graphics
 
         static void Main(string[] args)
         {
+            //Public variables to be used throughout the program
             int rowNum = 0;
             int colNum = 0;
             int realNumber;
@@ -19,6 +20,7 @@ namespace Turtle_Graphics
             bool goLeft = false;
             bool goRight = true;
 
+            //Floor array containing the canvas
             int[,] floor = new int[20, 20]
             {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -43,9 +45,10 @@ namespace Turtle_Graphics
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             };
             
+            //Unused array for the program
             int[,] program = new int[2, 1];
             
-
+            //Program introduction
             Console.WriteLine("Welcome to the Turtle Graphics Program");
             Console.WriteLine("Keep in mind your commands.  If you forget, type 'commands' to see them again.");
 
@@ -53,6 +56,7 @@ namespace Turtle_Graphics
 
             TakeInput();
 
+            //Prints the commands for the user
             void ViewCommands()
             {
                 Console.WriteLine("1\tPen up");
@@ -68,6 +72,7 @@ namespace Turtle_Graphics
                 TakeInput();
             }
 
+            //This receives the user's input for the next command to be entered
             void TakeInput()
             {
                 string userCommand = Console.ReadLine();
@@ -102,6 +107,7 @@ namespace Turtle_Graphics
                 }
             }
 
+            //Once the user enters a command, the program directs to the proper method
             void BeginDrawing()
             {
                 switch (realNumber)
@@ -138,6 +144,7 @@ namespace Turtle_Graphics
                 }
             }
 
+            //Command 1 executes the pen up command to let the user lift the pen
             void PenUp()
             {
                 if (isDrawing)
@@ -155,6 +162,7 @@ namespace Turtle_Graphics
                 
             }
 
+            //Command 2 executes the pen down command to let the user place it down
             void PenDown()
             {
                 if (isDrawing == false)
@@ -172,6 +180,7 @@ namespace Turtle_Graphics
                 
             }
 
+            //Command 3 executes to let the turtle turn right
             void TurnRight()
             {
                 if (goDown)
@@ -200,8 +209,10 @@ namespace Turtle_Graphics
                 TakeInput();
             }
 
+            //Command 4 executes to let the turtle turn left
             void TurnLeft()
             {
+                
                 if (goDown)
                 {
                     goRight = true;
@@ -228,27 +239,21 @@ namespace Turtle_Graphics
                 TakeInput();
             }
 
+            //Command 5 executes to let the turtle move forward however many spaces the user enters
             void MoveForward()
             {
                 string userInput = Console.ReadLine();
 
                 try
                 {
+                    //This attempts to convert the userInput to int.
                     userDistance = Convert.ToInt32(userInput);
 
+                    //Checks that the user is painting within the bounds of the program
                     if (userDistance >= 0 && userDistance <= 20)
                     {
-                        if (isDrawing)
-                        {
-                            Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
-                            TurtleMoving();
-                        }
-
-                        if (isDrawing == false)
-                        {
-                            Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
-                            TurtleMoving();
-                        }
+                        Console.WriteLine("Turtle has moved {0} spaces.", userDistance);
+                        TurtleMoving();
                     }
                     else
                     {
@@ -265,45 +270,55 @@ namespace Turtle_Graphics
                 TakeInput();
             }
 
+            //Checks for the direction that the turtle is facing and moves them in that direction while changing the tiles.
             void TurtleMoving()
             {
+                //If the turtle is facing downward
                 if (goDown)
                 {
+                    //The loop keeps moving the turtle forward until the given distance is zero
                     while (userDistance > 0)
                     {
+                        //penActive draws or doesn't draw on the floor while moving the turtle.
                         floor.SetValue(penActive, rowNum, colNum);
                         userDistance--;
                         colNum++;
                     }
                     TakeInput();
                 }
-
+                //If the turtle is facing up
                 if (goUp)
                 {
+                    //The loop keeps moving the turtle forward until the given distance is zero
                     while (userDistance > 0)
                     {
+                        //penActive draws or doesn't draw on the floor while moving the turtle.
                         floor.SetValue(penActive, rowNum, colNum);
                         userDistance--;
                         colNum--;
                     }
                     TakeInput();
                 }
-
+                //If the turtle is facing the left
                 if (goLeft)
                 {
+                    //The loop keeps moving the turtle forward until the given distance is zero
                     while (userDistance > 0)
                     {
+                        //penActive draws or doesn't draw on the floor while moving the turtle.
                         floor.SetValue(penActive, rowNum, colNum);
                         userDistance--;
                         rowNum--;
                     }
                     TakeInput();
                 }
-                
+                //If the turtle is facing the right
                 if (goRight)
                 {
-                    while(userDistance > 0)
+                    //The loop keeps moving the turtle forward until the given distance is zero
+                    while (userDistance > 0)
                     {
+                        //penActive draws or doesn't draw on the floor while moving the turtle.
                         floor.SetValue(penActive, rowNum, colNum);
                         userDistance--;
                         rowNum++;
@@ -312,6 +327,7 @@ namespace Turtle_Graphics
                 }
             }
 
+            //This prints the canvas for the user to see, with the updated drawing
             void PrintData()
             {
                 int rowLength = floor.GetLength(0);
