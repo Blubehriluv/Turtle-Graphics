@@ -330,7 +330,10 @@ namespace Turtle_Graphics
 
             void ExitApp()
             {
-                TakeInput();
+                Console.WriteLine("Thank you for using the Turtle Graphics program!");
+                Console.WriteLine("Press enter to continue...");
+                Console.ReadLine();
+                System.Environment.Exit(1);
             }
         }
     }
