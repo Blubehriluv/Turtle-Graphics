@@ -107,32 +107,32 @@ namespace Turtle_Graphics
                 switch (realNumber)
                 {
                     case 1:
-                        Console.WriteLine("Command 1 has been entered.");
+                        Console.WriteLine("Command 1: Pen Up executed.");
                         PenUp();
                         break;
                     case 2:
-                        Console.WriteLine("Command 2 has been entered.");
+                        Console.WriteLine("Command 2: Pen Down executed.");
                         PenDown();
                         break;
                     case 3:
-                        Console.WriteLine("Command 3 has been entered.");
+                        Console.WriteLine("Command 3: Turn Right executed.");
                         TurnRight();
                         break;
                     case 4:
-                        Console.WriteLine("Command 4 has been entered.");
+                        Console.WriteLine("Command 4: Turn Left executed.");
                         TurnLeft();
                         break;
                     case 5:
-                        Console.WriteLine("Command 5 has been entered.");
+                        Console.WriteLine("Command 5: Move forward executed.");
                         Console.WriteLine("Please enter the distance to travel.");
                         MoveForward();
                         break;
                     case 6:
-                        Console.WriteLine("Command 6 has been entered.");
+                        Console.WriteLine("Command 6: Print Canvas executed.");
                         PrintData();
                         break;
                     case 9:
-                        Console.WriteLine("Command 9 has been entered.");
+                        Console.WriteLine("Command 9: End Program executed.");
                         ExitApp();
                         break;
                 }
@@ -321,9 +321,18 @@ namespace Turtle_Graphics
                 {
                     for (int j = 0; j < colLength; j++)
                     {
-                        Console.Write(string.Format("{0} ", floor[i, j]));
+                        if (floor[i, j] == 0)
+                        {
+                            Console.Write("O ");
+                        }
+
+                        if (floor[i, j] == 1)
+                        {
+                            Console.Write("X ");
+                        }
+                        //Console.Write("{0} ", floor[i, j]);
                     }
-                    Console.Write(Environment.NewLine + Environment.NewLine);
+                    Console.Write(Environment.NewLine);
                 }
                 TakeInput();
             }
